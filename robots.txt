@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /
+
+Sitemap: https://ahuan0317.github.io/tripcove-site/sitemap.xml
