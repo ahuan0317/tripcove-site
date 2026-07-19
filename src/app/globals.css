@@ -1,0 +1,306 @@
+@import "tailwindcss";
+
+/* ============================================================
+   TripCove 官网设计系统 —「明信片拼贴 × 旅行手帐」
+   与小程序端 1:1 同源：米纸底 · 印章红 · 墨绿 · 暖金 · 深棕字
+   招牌技法：撕齿边 / 胶带 / 三层邮戳 / ±1.2° 微旋 / 纸纹
+   ============================================================ */
+
+@theme {
+  /* —— 色板（与 miniapp uni.scss 同值）—— */
+  --color-paper: #fbf7f0;
+  --color-paper2: #f4eee2;
+  --color-cream: #ffffff;
+  --color-ink: #3d2e22;
+  --color-ink-soft: #7a6a5c;
+  --color-ink-faint: #b0a696;
+  --color-stamp: #d64a3c;
+  --color-stamp-deep: #b83a2e;
+  --color-stamp-wash: #f6ddd8;
+  --color-moss: #3b6b4a;
+  --color-moss-deep: #2a4d34;
+  --color-moss-wash: #dce8de;
+  --color-sun: #e8a33d;
+  --color-sun-deep: #c8842a;
+  --color-sun-wash: #f7e8cf;
+  --color-info: #4a78a8;
+  --color-line: #e8dfd0;
+  --color-line-dark: #d4c8b4;
+
+  /* —— 字体 —— */
+  --font-display: "Noto Serif SC", "Source Han Serif SC", "Songti SC",
+    "STSong", "SimSun", serif;
+  --font-hand: "Kaiti SC", "STKaiti", "KaiTi", "Ma Shan Zheng",
+    "Noto Serif SC", serif;
+  --font-body: "PingFang SC", "MiSans", "HarmonyOS Sans SC",
+    "Microsoft YaHei", "Noto Sans SC", sans-serif;
+  --font-mono: "IBM Plex Mono", "SFMono-Regular", "Consolas", monospace;
+
+  /* —— 阴影（miniapp 同源）—— */
+  --shadow-soft: 0 2px 8px rgba(61, 46, 34, 0.05);
+  --shadow-card: 0 6px 16px rgba(61, 46, 34, 0.1);
+  --shadow-lift: 0 10px 24px rgba(61, 46, 34, 0.14);
+  --shadow-stamp: 0 3px 8px rgba(184, 58, 46, 0.28);
+  --shadow-moss: 0 5px 13px rgba(42, 77, 52, 0.22);
+
+  /* —— 动效 —— */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-marquee: marquee 32s linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-spin-slow: spin-slow 26s linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* —— 页面底：米纸纹 + 左上暖金晕 + 纸张渐变（miniapp page 同款）—— */
+body {
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  background-color: var(--color-paper);
+  background-image: radial-gradient(rgba(61, 46, 34, 0.025) 1px, transparent 1px),
+    radial-gradient(140% 50% at 50% -10%, rgba(232, 163, 61, 0.08), transparent 60%),
+    linear-gradient(165deg, #fcf9f3 0%, #f6f0e4 100%);
+  background-size: 4px 4px, 100% 100%, 100% 100%;
+}
+
+::selection {
+  background: var(--color-stamp);
+  color: #fff;
+}
+
+/* —— 米纸卡（PaperCard 同款）—— */
+.paper-card {
+  background: var(--color-cream);
+  border-radius: 1rem;
+  border: 1px solid var(--color-line);
+  box-shadow: var(--shadow-card);
+}
+
+/* —— 手帐微旋 —— */
+.tilt-l {
+  transform: rotate(-1.2deg);
+}
+.tilt-r {
+  transform: rotate(1.2deg);
+}
+
+/* —— 眉标：◆ 小钻石 + 字距（eyebrow 同款）—— */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  letter-spacing: 0.28em;
+  color: var(--color-stamp);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.eyebrow::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  flex-shrink: 0;
+  background: var(--color-stamp);
+  transform: rotate(45deg);
+}
+
+/* —— 三层邮戳：实边 + 浅底 + 虚线内圈（stamp 同款）—— */
+.seal {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 2px solid var(--color-stamp);
+  background: var(--color-stamp-wash);
+  color: var(--color-stamp);
+  font-weight: 800;
+}
+.seal::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  border: 1px dashed rgba(184, 58, 46, 0.5);
+  pointer-events: none;
+}
+.seal-moss {
+  border-color: var(--color-moss);
+  background: var(--color-moss-wash);
+  color: var(--color-moss);
+}
+.seal-moss::after {
+  border-color: rgba(42, 77, 52, 0.5);
+}
+.seal-sun {
+  border-color: var(--color-sun-deep);
+  background: var(--color-sun-wash);
+  color: var(--color-sun-deep);
+}
+.seal-sun::after {
+  border-color: rgba(200, 132, 42, 0.5);
+}
+
+/* —— 撕齿边：radial-gradient 半圆缺口（perf 同款）—— */
+.perf-b {
+  position: relative;
+}
+.perf-b::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 8px;
+  background: radial-gradient(circle at 9px 8px, var(--color-cream) 5px, transparent 5.5px)
+    repeat-x;
+  background-size: 18px 8px;
+  pointer-events: none;
+}
+.perf-b-paper::after {
+  background: radial-gradient(circle at 9px 8px, var(--color-paper) 5px, transparent 5.5px)
+    repeat-x;
+  background-size: 18px 8px;
+}
+
+/* —— 收据/票据上下撕齿（RECEIPT 同款，mask 挖缺口）—— */
+.receipt {
+  --notch: radial-gradient(circle, transparent 4.5px, #000 5px);
+  mask-image: linear-gradient(#000, #000),
+    radial-gradient(circle at 9px 0, transparent 5px, #000 5.5px),
+    radial-gradient(circle at 9px 100%, transparent 5px, #000 5.5px);
+  mask-size: 100% calc(100% - 12px), 18px 7px, 18px 7px;
+  mask-position: 0 6px, 0 0, 0 100%;
+  mask-repeat: no-repeat, repeat-x, repeat-x;
+}
+
+/* —— 胶带条（tape 同款：米黄透明 + 微旋 + 毛边）—— */
+.tape {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  width: 96px;
+  height: 28px;
+  transform: translateX(-50%) rotate(-3deg);
+  background: linear-gradient(
+    135deg,
+    rgba(232, 195, 120, 0.55),
+    rgba(212, 175, 100, 0.45)
+  );
+  box-shadow: 0 1px 4px rgba(61, 46, 34, 0.1);
+  z-index: 2;
+  pointer-events: none;
+  mask-image: repeating-linear-gradient(0deg, #000 0 2px, rgba(0, 0, 0, 0.85) 2px 4px);
+}
+
+/* —— 虚线分割（dashed-line 同款）—— */
+.dash-line {
+  height: 1px;
+  background-image: linear-gradient(90deg, var(--color-line-dark) 50%, transparent 0);
+  background-size: 8px 1px;
+}
+
+/* —— 玻璃拟态导航 —— */
+.glass {
+  background: rgba(251, 247, 240, 0.82);
+  backdrop-filter: blur(14px) saturate(1.3);
+  -webkit-backdrop-filter: blur(14px) saturate(1.3);
+}
+
+/* —— 手写标注 —— */
+.hand {
+  font-family: var(--font-hand);
+}
+
+/* —— 暖金手绘下划线 —— */
+.hand-underline {
+  background-image: linear-gradient(
+    104deg,
+    transparent 0.5%,
+    rgba(232, 163, 61, 0.65) 2.5%,
+    rgba(232, 163, 61, 0.65) 96%,
+    transparent 98%
+  );
+  background-repeat: no-repeat;
+  background-size: 100% 0.32em;
+  background-position: 0 90%;
+}
+
+/* —— 旋转邮戳环 —— */
+.stamp-ring {
+  animation: var(--animate-spin-slow);
+  transform-origin: center;
+}
+
+/* —— 印章红渐变主按钮（btn.primary 同款）—— */
+.btn-stamp {
+  background: linear-gradient(135deg, #e0594a 0%, #b83a2e 100%);
+  color: #fff;
+  border-radius: 999px;
+  box-shadow: 0 3px 8px rgba(184, 58, 46, 0.28), 0 10px 24px rgba(184, 58, 46, 0.22);
+  font-weight: 700;
+  transition: transform 0.2s var(--ease-out-expo), box-shadow 0.2s;
+}
+.btn-stamp:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(184, 58, 46, 0.32), 0 16px 32px rgba(184, 58, 46, 0.28);
+}
+.btn-stamp:active {
+  transform: scale(0.97);
+}
+
+/* —— 虚线辅按钮（btn 辅同款）—— */
+.btn-dashed {
+  border: 2px dashed var(--color-stamp);
+  color: var(--color-stamp);
+  border-radius: 999px;
+  font-weight: 600;
+  transition: all 0.25s;
+}
+.btn-dashed:hover {
+  background: var(--color-stamp-wash);
+  border-style: solid;
+}
