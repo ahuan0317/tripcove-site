@@ -7,9 +7,9 @@ import SectionHead from "./SectionHead";
 
 /** 城市印章云：visited=盖章，wish=虚线待盖 */
 const VISITED = [
-  { name: "广州", variant: "", tilt: -3 },
+  { name: "广州", variant: "", tilt: -3, count: 3 },
   { name: "佛山", variant: "seal-moss", tilt: 2 },
-  { name: "深圳", variant: "", tilt: -2 },
+  { name: "深圳", variant: "", tilt: -2, count: 2 },
   { name: "珠海", variant: "seal-sun", tilt: 3 },
   { name: "惠州", variant: "seal-moss", tilt: -4 },
   { name: "江门", variant: "", tilt: 2 },
@@ -77,7 +77,7 @@ export default function FootprintSection() {
               <span className="text-stamp">盖</span>进旅行手帐
             </>
           }
-          desc="GPS 围栏自动打卡（到达 200 米内、停留 10 分钟即触发），邮戳落下、墨水晕开、指尖轻震——去过的省市像护照一样盖上印章，还能切到真·中国地图：省份整片染色，城市钉上你行程的封面照。收藏的地方先进「想去清单」留白待盖，打卡后自动转为「已去」——想去与已去，构成你完整的旅行资产。"
+          desc="GPS 围栏自动打卡（到达 200 米内、停留 10 分钟即触发），邮戳落下、墨水晕开、指尖轻震；山顶 GPS 飘了？勾选「免定位打卡」照样盖章，24 小时去重防刷。切到真·中国地图：去过的省份整片染色，每座城市挂上「代表照＋印章红名牌」小挂牌，点一下直达城市攻略，还能一路放大到县级。收藏的地方先进「想去清单」横滑明信片墙留白待盖，打卡后自动转「已去」——想去与已去，构成你完整的旅行资产。"
         />
 
         <div ref={ref} className="grid items-start gap-12 lg:grid-cols-[1.15fr_0.85fr]">
@@ -108,7 +108,9 @@ export default function FootprintSection() {
                     className={`seal ${c.variant} size-[74px] flex-col`}
                   >
                     <span className="hand text-lg leading-none">{c.name}</span>
-                    <span className="mt-0.5 text-[9px] leading-none opacity-80">✓ 已去</span>
+                    <span className="mt-0.5 text-[9px] leading-none opacity-80">
+                      ✓ 已去{"count" in c ? ` ×${c.count}` : ""}
+                    </span>
                   </motion.span>
                 ))}
               </div>
@@ -178,8 +180,9 @@ export default function FootprintSection() {
                   <span className="block text-[14px] font-bold text-ink">
                     省市双级足迹地图
                   </span>
-                  省份视图整片染色看版图，缩放进城市视图——每座点亮的城，
-                  钉着那次行程的<strong className="text-stamp">封面照</strong>，一眼认出那趟旅行。
+                  省份整片染色看版图，每座点亮的城挂着「代表照＋名牌」小挂牌，
+                  点一下直达<strong className="text-stamp">城市攻略</strong>；
+                  底图透出省市县，一路放大到县级看细节。同城多次打卡自动聚合，角标记次数。
                 </p>
               </div>
             </Reveal>
@@ -196,7 +199,7 @@ export default function FootprintSection() {
                 <p className="text-[12.5px] leading-relaxed text-ink-soft">
                   年末自动生成：城市数、总里程、偏好类型、花费估算——
                   一张海报，让朋友圈知道你这一年走了多远。
-                  足迹版图也可随时生成分享海报，好友扫码即可
+                  足迹版图也可随时生成分享海报——真·可扫的墨绿二维码，好友扫一扫即可
                   <strong className="text-stamp">一键复刻</strong>你的行程。
                 </p>
                 <span className="seal seal-sun absolute -right-2 -top-3 size-12 rotate-12 text-[10px]">

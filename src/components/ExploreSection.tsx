@@ -71,7 +71,7 @@ export default function ExploreSection() {
               <span className="text-stamp">滑一滑</span>就知道
             </>
           }
-          desc="选好距离、人群、类型三个条件，TripCove 就把「值得去」的地点做成明信片推给你。匹配值融合距离、热度、你的画像与当下时段——上午推公园早茶，傍晚推日落夜市；休息中的地点自动后置，不让你白跑一趟。滑腻了？一键切到地图模式，商家实拍图钉在地图上，拖拽缩放，周边好去处一屏扫清。"
+          desc="选好距离、人群、类型三个条件，TripCove 就把「值得去」的地点做成明信片推给你。匹配值融合距离、热度、你的画像与当下时段——上午推公园早茶，傍晚推日落夜市；休息中的地点自动后置，不让你白跑一趟。滑腻了？一键切到地图模式，商家实拍图钉在地图上，拖拽缩放，周边好去处一屏扫清。不止身边——城市选择器覆盖全国 369 城，人在广州也能提前云探索北京。"
         />
 
         <div className="grid gap-8 lg:grid-cols-[1fr_1.1fr]">
@@ -94,8 +94,12 @@ export default function ExploreSection() {
                   地图模式用商家实拍图做图钉，点开店名即达详情，拖拽缩放自由看。
                 </p>
                 <p className="text-xs leading-relaxed text-ink-soft">
-                  <span className="font-semibold text-stamp">拒绝定位授权？</span>
-                  没关系，可手动选城市；结果本地缓存，弱网也能继续滑。
+                  <span className="font-semibold text-stamp">全国 369 城随心切：</span>
+                  不止定位周边，选个城市就能云探索；拒绝定位授权也照样用。
+                </p>
+                <p className="text-xs leading-relaxed text-ink-soft">
+                  <span className="font-semibold text-stamp">会听人话的搜索：</span>
+                  「天安门附近的汉堡」这样说也懂，自动拆出地标与目标，就近排给你。
                 </p>
               </div>
             </div>

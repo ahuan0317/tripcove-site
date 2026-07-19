@@ -170,7 +170,7 @@ export default function Hero() {
             className="mt-12 grid max-w-md grid-cols-3 gap-4 border-t border-line pt-6"
           >
             {[
-              ["30–300", "km 探索半径"],
+              ["369 城", "全国随心探索"],
               ["9 类", "地点 × 5 类人群"],
               ["< 2s", "AI 首字响应"],
             ].map(([n, l]) => (

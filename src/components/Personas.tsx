@@ -43,7 +43,7 @@ const PERSONAS = [
     name: "深度旅行者",
     age: "自由行 · 攻略党",
     quote: "多日行程要自己掌控每个细节。",
-    answer: "多日时间线拖拽编排 + 盖章收集版图。",
+    answer: "AI 排或手动拼随意切，多日时间线全掌控。",
     seal: "seal-moss",
     tilt: "tilt-l",
   },

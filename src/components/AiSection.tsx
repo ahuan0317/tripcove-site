@@ -57,7 +57,7 @@ export default function AiSection() {
               <span className="text-stamp">AI</span> 排好一整天
             </>
           }
-          desc="结合知识库与高德实时 POI，AI 按营业时间、路程与预算档位生成可拖拽编辑的时间线行程——像棋手落子一样逐日呈现，边想边排。预算像收据小票一样实时汇总，超支立刻标红；排好后一键进入执行模式，带着你按时间线走完这一天。"
+          desc="生成前先弹一张画像表单——和谁去、玩几天、预算档位、口味节奏，信息收齐一次到位，不反复追问。AI 结合知识库与高德实时 POI，按营业时间、路程与预算生成可拖拽编辑的时间线行程，像棋手落子一样逐日呈现；预算像收据小票一样实时汇总，超支立刻标红。排好后一键进入执行模式，带着你按时间线走完这一天。"
         />
 
         <div ref={ref} className="grid items-start gap-10 lg:grid-cols-[1.05fr_0.95fr]">
@@ -153,6 +153,20 @@ export default function AiSection() {
                       </motion.div>
                     ))}
                   </div>
+                  {/* 追问贴纸：不用手打，一键续写 */}
+                  <div className="flex flex-wrap gap-1.5 pt-0.5">
+                    {["🍜 加点美食", "🐢 换轻松节奏", "📅 再加一天", "💰 压压预算"].map((s, i) => (
+                      <motion.span
+                        key={s}
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={inView ? { opacity: 1, y: 0 } : {}}
+                        transition={{ delay: 2.6 + i * 0.12 }}
+                        className="cursor-pointer rounded-full border border-dashed border-stamp/45 bg-stamp-wash/70 px-2.5 py-1 text-[10.5px] text-stamp transition-colors hover:bg-stamp-wash"
+                      >
+                        {s}
+                      </motion.span>
+                    ))}
+                  </div>
                 </div>
               </motion.div>
 
@@ -214,12 +228,12 @@ export default function AiSection() {
             <Reveal delay={0.25}>
               <ul className="grid gap-3 sm:grid-cols-2">
                 {[
+                  ["📋", "画像表单先问清：和谁去 · 玩几天 · 预算 · 口味 · 节奏"],
                   ["🔍", "知识库 + 高德实时 POI，答案带来源"],
-                  ["🖐", "行程可拖拽排序，同日跨日随意挪"],
                   ["⚡", "逐日落子呈现，打字光标边想边排"],
                   ["🧭", "执行模式：Day 吸顶 + 当天进度条，到点一键导航打卡"],
-                  ["💬", "生成后随时追问：加美食 / 换节奏 / 再压压预算"],
-                  ["🛡", "AI 输出先过内容安全审核再渲染"],
+                  ["🏷", "追问贴纸 + 接话建议一键续写；会话本地留存，重进不丢"],
+                  ["🧩", "不想全交给 AI？手动拼一份：选城市 → 按天勾地点 → 填预算"],
                 ].map(([icon, text]) => (
                   <li
                     key={text}
